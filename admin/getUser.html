@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="cache-control" content="no-cache"/>
+    <meta http-equiv="expires" content="0"/>
+    <meta http-equiv="pragma" content="no-cache"/>
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <link rel="stylesheet" href="../css/style.css"/>
+  </head>
+  <body>
+  	<div id="root" name="getUser.html">
+      <div id="dom-target" style="display: none">
+     
+    </div>
+    
+    <form data-ajax="false" id="updateformular" method="post" action="">
+       <div data-role="fieldcontain">
+           <fieldset>
+              <label for="UserId">User-ID</label>
+              <input type="text" name="user-id" id="user-id" focus>
+              <label for="UserName">User-Name</label>
+              <input type="text" name="userName" id="userName" focus>
+              <label for="groupName">Group</label>
+              <input type="text" name="groupName" id="groupName">
+              <label for="department">Department</label>
+              <input type="text" name="department" id="department">
+              <input type="submit">
+           </fieldset>
+       </div>
+   </form>
+  
+
+    <script src="../js/getUsers.js"></script>
+   </body>
+</html>
