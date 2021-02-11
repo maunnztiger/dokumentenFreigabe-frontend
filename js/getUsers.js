@@ -5,7 +5,7 @@ class Model {
     }
 
     getData(callback){
-      fetch('http://localhost/dokumentenFreigabe/admin/getUser',{
+      fetch('http://localhost/dokumentenFreigabe-backend/admin/getUser',{
         method: 'GET',
        })
       .then(response =>response.json())
@@ -46,7 +46,7 @@ class View {
     } else {
       data.forEach(value => {
         console.log('value: '+value.name)
-        const id = this.getElement('#user-id');
+        const id = this.getElement('#user_id');
         id.value = value.user_id;
         const name = this.getElement('#userName');
         name.value = value.name;
@@ -58,7 +58,36 @@ class View {
     }
  }
 
- 
+ updateUserData(){
+  
+  jQuery(document).ready(function($)
+  {
+      $("#updateformular").submit(function(event) {
+          // Standard-Aktion abbrechen
+          event.preventDefault();	
+  
+          // Formular per AJAX senden
+          var form=$(this);
+          $.ajax({
+              type: 'PUT',
+              url: 'http://localhost/dokumentenFreigabe-backend/admin/updateUser',
+              data : form.serialize(),
+              dataType: 'json',
+              encode: true
+          }).done(function(data) {
+              // Aktionen bei Erfolg
+              console.log('done: '+data);
+             setTimeout(function(){
+                  document.location.href = "http://localhost/dokumentenFreigabe-frontend/admin/newUserData.html"
+                },500);
+          }).fail(function(data) {
+              // Aktionen bei einem Fehler
+              console.log('fail: '+data);			
+          });
+      });
+      /**/
+  });
+ }
  
 
 }
@@ -70,6 +99,7 @@ class Controller {
     this.model.getData( function(data){
       obj.view.displayData(data)
     });
+    this.view.updateUserData();
   }
 }
 

@@ -7,9 +7,9 @@ class Model {
     getData(callback){
       fetch('http://localhost/dokumentenFreigabe-backend/Admin/listUsers',{
         method: 'GET',
-       })
-      .then(response => response.json())    
-      .then(data => callback(data));
+      })
+     .then(response => response.json())    
+     .then(data => callback(data));
     }
 }
   
@@ -228,7 +228,7 @@ class Controller {
     this.model = model;
     this.view = view;
     var obj = this;
-    this.model.getData( function(data){
+    this.model.getData(function(data){
       obj.view.displayData(data)
     });
   
