@@ -1,9 +1,5 @@
 class Model {
   
-    constructor() {
-
-    }
-
     getData(callback){
       fetch('http://localhost/dokumentenFreigabe-backend/Admin/listUsers',{
         method: 'GET',
@@ -118,28 +114,32 @@ class View {
       const del =  document.getElementsByClassName('span_3')[0];
       del.addEventListener('click', event => {
         event.preventDefault();
+        
         console.log('delete fired '+ this.name);
+        
         var baseURL = "http://localhost/dokumentenFreigabe-backend/";
-        var url  = baseURL+ "admin/deleteUser"
-        var params = { 
-          name: this.name,
-         };
-    
+        var url  = baseURL+ "admin/deleteUser?name="+this.name
+   
         if(confirm("You really want to delete user?") !== false){
-          var posting = $.post(url, params);
-          posting.done( function(data){
-                            console.log(data);
-                            setTimeout(function(){
-                              document.location.href = "deleteUser";
-                            },500);
-                    });
-        } 
+          $.ajax({
+            type: 'DELETE',
+            url: url,
+          }).done(function(data) {
+            // Aktionen bei Erfolg
+            console.log('done: '+data);
+            setTimeout(function(){
+                document.location.href = "http://localhost/dokumentenFreigabe-frontend/admin/listUsers.html"
+            },500);
+          }).fail(function(data) {
+            // Aktionen bei einem Fehler
+            console.log('fail: '+data);			
+          });
+        }
         if(confirm("You really want to delete user?") === false){
           return;
         }
-       
-     });
-    }, false);
+       });
+    });
   }
 
   hideContextMenu(){
@@ -213,8 +213,6 @@ if(!cmenu || cmenu === null) return true;
     this.div.style.left = menuPosition.x + "px";
     this.div.style.top = menuPosition.y + "px";
 
-   
-
   return false;
   }
 
@@ -236,7 +234,7 @@ class Controller {
   }
 }
 
-const app = new Controller(new Model(),new View() );
+const app = new Controller(new Model(),new View());
          
          
   

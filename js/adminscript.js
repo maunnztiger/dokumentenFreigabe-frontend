@@ -109,16 +109,16 @@ this.commandList.addEventListener('contextmenu', event => {
   const logout =  document.getElementsByClassName('span_3')[0];
   logout.addEventListener('click', event => {
     event.preventDefault();
-    console.log('logout fired ');
+    console.log('logout fired');
     fetch('http://localhost/dokumentenFreigabe-backend/index/logout',{
       method: 'GET',
      })
     .then(response => response.json())    
     .then(data => {
       console.log(data);
-      /*setTimeout(function(){
+      setTimeout(function(){
         document.location.href = "http://localhost/dokumentenFreigabe-frontend/index.html";
-      },500);*/
+      },500);
     });
 
    
