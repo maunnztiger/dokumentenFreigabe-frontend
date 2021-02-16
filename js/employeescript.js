@@ -100,7 +100,7 @@ class Model {
     displayPDF.addEventListener('click', event => {
       event.preventDefault();
       setTimeout(function(){
-        document.location.href = "listUsers.html";
+        document.location.href = "displayPDF.html";
       },500);
     });
   
