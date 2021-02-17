@@ -113,7 +113,11 @@ this.commandList.addEventListener('contextmenu', event => {
     fetch('http://localhost/dokumentenFreigabe-backend/index/logout',{
       method: 'GET',
      })
-    .then(response => response.json())    
+    .then(response =>{
+      console.log(response),
+      response.json()
+      
+    })    
     .then(data => {
       console.log(data);
       setTimeout(function(){

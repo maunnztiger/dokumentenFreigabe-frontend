@@ -4,6 +4,36 @@ class Model {
 
     }
     
+    sendToken(callback){
+
+      const token = "3c28d89b80f70302b04fce2a1451f6ea";
+
+      jQuery(document).ready(function($)
+      {
+          
+              $.ajax({
+                  type: 'POST',
+                  url: 'http://localhost/dokumentenFreigabe-backend/index/index',
+                  data : {
+                          token : token
+                          },  
+                  dataType: 'json',
+                  encode: true
+              }).done(function(data) {
+                  // Aktionen bei Erfolg
+                  callback(data);
+              }).fail(function(data) {
+                  // Aktionen bei einem Fehler
+                  console.log('fail: '+data);			
+              });
+      
+       
+      });
+    }
+
+
+
+
     getData(callback){
       var path = './images/ncis.jpg'
       fetch('http://localhost/dokumentenFreigabe-backend/Index/index',{
@@ -189,10 +219,13 @@ class Controller {
     this.model = model;
     this.view = view;
     var obj = this;
-    this.model.getData(function(data){
-      obj.view.displayData(data)
+    this.model.sendToken(function(data){
+      if(data === true)
+        obj.model.getData(function(data){
+          obj.view.displayData(data)
+        });
     });
-    this.view.dropContextMenu();
+   this.view.dropContextMenu();
   }
 }
 
