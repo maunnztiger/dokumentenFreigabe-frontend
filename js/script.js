@@ -14,17 +14,17 @@ class Model {
               $.ajax({
                   type: 'POST',
                   url: 'http://localhost/dokumentenFreigabe-backend/index/index',
-                  data : {
-                          token : token
-                          },  
                   dataType: 'json',
-                  encode: true
-              }).done(function(data) {
+                  encode: true,
+                  headers: {
+                    "Authorization": token
+                  },
+                }).done(function(data) {
                   // Aktionen bei Erfolg
                   callback(data);
               }).fail(function(data) {
                   // Aktionen bei einem Fehler
-                  console.log('fail: '+data);			
+                  console.log('fail: '+ data);			
               });
       
        

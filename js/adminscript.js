@@ -104,7 +104,18 @@ this.commandList.addEventListener('contextmenu', event => {
     },500);
   });
 
+  const xmlGetRequest = document.getElementsByClassName('span_2')[0];
+  xmlGetRequest.addEventListener('click', event => {
+    event.preventDefault();
   
+      
+    setTimeout(function(){
+      document.location.href = "http://localhost/dokumentenFreigabe-frontend/admin/xmlView.html";
+    },500);
+     
+  });
+
+
   
   const logout =  document.getElementsByClassName('span_3')[0];
   logout.addEventListener('click', event => {
@@ -129,6 +140,20 @@ this.commandList.addEventListener('contextmenu', event => {
    });
 }, false);
 }
+
+
+iterateNodes(nodes) {
+  for (var i = 0; i < nodes.length; i++) {
+    if (nodes[i].nodeType === 4) {
+      document.body.innerHTML += nodes[i].textContent + "<br>"
+    };
+      if (nodes[i].childNodes.length) {
+        iterateNodes(nodes[i].childNodes)
+      }
+    }
+}
+
+
 
 hideContextMenu(){
 this.div.remove();
@@ -173,13 +198,21 @@ li_1.style.background = '#fff2df';
 li_1.style.borderBottom = '1px solid #dd0074';
 
 
+const li_2 = this.createElement('li');
+const span_2 = this.createElement('span', 'span_2');
+span_2.textContent= 'Get XML-Object';
+li_2.append(span_2);
+li_2.style.margin = 0;
+li_2.style.background = '#fff2df';
+li_2.style.borderBottom = '1px solid #dd0074';
+
 const li_3 = this.createElement('li');
 const span_3 = this.createElement('span', 'span_3');
 span_3.textContent= 'Abmelden';
 li_3.style.background = '#fff2df';
 li_3.append(span_3);
 
-ul.append(li_1,li_3);
+ul.append(li_1, li_2, li_3);
 this.div.append(ul);
 
 
