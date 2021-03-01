@@ -10,7 +10,7 @@ class Model {
 
       jQuery(document).ready(function($)
       {
-          
+        var path = './images/ncis.jpg'
               $.ajax({
                   type: 'POST',
                   url: 'http://localhost/dokumentenFreigabe-backend/index/index',
@@ -21,6 +21,8 @@ class Model {
                   },
                 }).done(function(data) {
                   // Aktionen bei Erfolg
+                  data.push(path);
+                  console.log(data);
                   callback(data);
               }).fail(function(data) {
                   // Aktionen bei einem Fehler
@@ -32,20 +34,6 @@ class Model {
     }
 
 
-
-
-    getData(callback){
-      var path = './images/ncis.jpg'
-      fetch('http://localhost/dokumentenFreigabe-backend/Index/index',{
-        method: 'GET',
-       })
-      .then(response => response.json())    
-      .then(data => {
-        data.push(path);
-        callback(data);
-      });
-       
-    }
 }
   
 class View {
@@ -219,12 +207,11 @@ class Controller {
     this.model = model;
     this.view = view;
     var obj = this;
-    this.model.sendToken(function(data){
-      if(data === true)
-        obj.model.getData(function(data){
+  
+        this.model.sendToken(function(data){
           obj.view.displayData(data)
         });
-    });
+      
    this.view.dropContextMenu();
   }
 }
