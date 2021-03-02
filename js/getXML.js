@@ -13,7 +13,7 @@ class Model {
           //console.log(dom.documentElement.childNodes == "parsererror" ? "error while parsing" : dom.documentElement.childNodes);
           callback(dom.documentElement.childNodes);            
         });
-        request.open("GET", "http://localhost/dokumentenFreigabe-backend/admin/getXMLObject");
+        request.open("GET", "http://localhost/dokumentenFreigabe-backend/admin/getXMLBinary");
         request.send();
       
        

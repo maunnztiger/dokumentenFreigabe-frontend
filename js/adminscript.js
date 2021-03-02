@@ -95,6 +95,13 @@ this.commandList.addEventListener('contextmenu', event => {
   
   });
 
+const pdf = document.getElementsByClassName('span_0')[0];
+pdf.addEventListener('click', event => {
+    event.preventDefault();
+    setTimeout(function(){
+      document.location.href = "getPDF.html";
+    },500);
+  });
 
   const userList = document.getElementsByClassName('span_1')[0];
   userList.addEventListener('click', event => {
@@ -187,6 +194,13 @@ this.div.setAttribute("id", "context");
 
 const ul = this.createElement('ul');
 
+const li_0 = this.createElement('li');
+const span_0 = this.createElement('span', 'span_0');
+span_0.textContent= 'Get-PDF';
+li_0.append(span_0);
+li_0.style.margin = 0;
+li_0.style.background = '#fff2df';
+li_0.style.borderBottom = '1px solid #dd0074';
 
 
 const li_1 = this.createElement('li');
@@ -212,7 +226,7 @@ span_3.textContent= 'Abmelden';
 li_3.style.background = '#fff2df';
 li_3.append(span_3);
 
-ul.append(li_1, li_2, li_3);
+ul.append(li_0, li_1, li_2, li_3);
 this.div.append(ul);
 
 
