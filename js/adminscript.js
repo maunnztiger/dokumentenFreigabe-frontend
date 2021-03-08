@@ -123,8 +123,18 @@ pdf.addEventListener('click', event => {
   });
 
 
+  const videoParams = document.getElementsByClassName('span_3')[0];
+  videoParams.addEventListener('click', event => {
+    event.preventDefault();
   
-  const logout =  document.getElementsByClassName('span_3')[0];
+      
+    setTimeout(function(){
+      document.location.href = "http://localhost/dokumentenFreigabe-frontend/admin/listVideoParams.html";
+    },500);
+     
+  });
+  
+  const logout =  document.getElementsByClassName('span_4')[0];
   logout.addEventListener('click', event => {
     event.preventDefault();
     console.log('logout fired');
@@ -222,11 +232,19 @@ li_2.style.borderBottom = '1px solid #dd0074';
 
 const li_3 = this.createElement('li');
 const span_3 = this.createElement('span', 'span_3');
-span_3.textContent= 'Abmelden';
+span_3.textContent= 'Get Video List';
 li_3.style.background = '#fff2df';
+li_3.style.margin =0;
+li_3.style.borderBottom = '1px solid #dd0074';
 li_3.append(span_3);
 
-ul.append(li_0, li_1, li_2, li_3);
+const li_4 = this.createElement('li');
+const span_4 = this.createElement('span', 'span_4');
+span_4.textContent= 'Abmelden';
+li_4.style.background = '#fff2df';
+li_4.append(span_4);
+
+ul.append(li_0, li_1, li_2, li_3, li_4);
 this.div.append(ul);
 
 
