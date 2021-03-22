@@ -94,7 +94,7 @@ class View {
         } 
       
          if(value.endsWith('jpg') == false){
-          this.div2 = this.createElement('div');
+          this.div2 = this.createElement('div', 'menu_div');
           this.div2.style.width = '40%';
           this.div2.style.float = 'right';
           const span = this.createElement('span');
@@ -109,98 +109,18 @@ class View {
     }
  }
 
- dropContextMenu(){
-  this.list.addEventListener('contextmenu', event => {
-     
-    var cmenu = true;
-    this.contextmenue(cmenu, event);
-    event.preventDefault();
-    console.log("fired " + event.target.textContent);
-    
-    document.addEventListener('mousedown', event  => {
-      event.preventDefault(); 
-      var button = event.button;
-      if ( button === 1){
-        console.log("button clicked");
-        this.hideContextMenu();
-      }
-     
-     })
-
-    document.addEventListener('keydown', event  => {
-      if (event.code === 'Escape') {
-          console.log("keybord clicked "+ event.code);
-          this.hideContextMenu();
-          console.log("menu hidden");
-      }
-    
-    });
-
-    const login = document.getElementsByClassName('span_0')[0];
-    login.addEventListener('click', event => {
-      event.preventDefault();
-      setTimeout(function(){
-        document.location.href = "http://localhost/dokumentenFreigabe-frontend/index/formular.html"
-      },500);
-    })
-
-   
-  }, false);
+openLogin() {
+  const login = document.getElementsByClassName('menu_div')[0];
+        login.addEventListener('click', event =>{
+          event.preventDefault();
+          console.log('login clicked');
+          setTimeout(function(){
+            document.location.href = "index/formular.html";
+          },500);
+        })
+  
 }
 
-hideContextMenu(){
-  this.div.remove();
-}
-
-getPosition(e) {
-  var posx = 0;
-  var posy = 0;
-
-  if (!e) var e = window.event;
-   
-    posx = e.clientX ;
-                       
-    posy = e.clientY ; 
- 
-  console.log('position handled');
-  return {
-    x: posx,
-    y: posy
-  }
-}
-
-
-contextmenue(cmenu,e){
-  
-  //build the dom-elements here:
-if(!cmenu || cmenu === null) return true;
-
-  this.div = this.createElement('div', 'absolute');
-  this.div.setAttribute("id", "context");
-
-  const ul = this.createElement('ul');
-  const li = this.createElement('li');
-  const span_0 = this.createElement('span', 'span_0');
-  span_0.textContent= 'Login';
-  li.append(span_0);
-  li.style.margin = 0;
-  li.style.background = '#fff2df';
-  li.style.borderBottom = '1px solid #dd0074';
-
-  
-  ul.append(li);
-  this.div.append(ul);
-  
-
-  var menuPosition = this.getPosition(e);
-  console.log(menuPosition);
-  document.body.append(this.div);
-  this.div.style.position = 'absolute';
-  this.div.style.left = menuPosition.x + "px";
-  this.div.style.top = menuPosition.y + "px";
-
-  return false;
- }
 }
 class Controller {
   constructor(model, view) {
@@ -210,9 +130,10 @@ class Controller {
   
         this.model.sendToken(function(data){
           obj.view.displayData(data)
+          obj.view.openLogin();
         });
-      
-   this.view.dropContextMenu();
+     
+  
   }
 }
 

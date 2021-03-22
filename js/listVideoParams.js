@@ -43,6 +43,9 @@ class Model {
     this.commandList.style.top = '10';         
     this.commandList.style.left = '100%';
     this.commandList.style.background ='#aaabf6';
+    this.div = this.createElement('div');
+   
+    
     this.app.append(this.headline, this.commandList);
    
   }
@@ -67,6 +70,10 @@ class Model {
       this.commandList.append(p);
     } else {
       data.forEach(value => {
+        this.div_menu = this.createElement('div', 'div_menu');
+        this.div_menu.style.width = '100%';
+        this.div_menu.style.padding = '2%';
+        this.div_menu.style.float = 'left';
         const li = this.createElement('li');
         li.style.background ='#aaabf6';
         if(value.image.endsWith('jpg')){
@@ -80,17 +87,21 @@ class Model {
           this.img.style.margin = '1,5%';
           this.img.style.padding = '1%';
           this.img.style.width = '100%';
-          const div_one = this.createElement('div')
-          div_one.style.float = 'left';
-          div_one.style.width = '100%';
-          div_one.style.padding = '1%';
-          div_one.append(this.img);
-          this.commandList.append(div_one);
+          const div_img = this.createElement('div')
+          
+          div_img.style.float = 'left';
+          div_img.style.width = '100%';
+          div_img.style.padding = '1%';
+          div_img.append(this.img);
+          
          
-         
+          const span2 = this.createElement('span');
+          span2.textContent = ' Video freischalten für: right click!';
+          this.div_menu.append(span2);
+          this.commandList.append(this.div_menu, div_img);
           this.commandList.style.width = '100%';
 
-        
+          
 
         } 
       
@@ -103,20 +114,16 @@ class Model {
             nav.textContent = parseInt(value.plays);
            
             contain.style.width = '2.4%';
-            
             contain.style.height = '10px';
             contain.style.backgroundColor = 'black';
             contain.style.background =  'linear-gradient(to right bottom, #aaabf6 50%, black 50%)';
             contain.style.transform = 'rotate(-45deg)';
-            
-
             const span = this.createElement('span');
             span.textContent = value.name;
             li.style.margin = '2.5%';
             li.style.padding = '5%';
             li.style.width = '90%';
             li.textContent = value.time;
-           
             li.append(span);
             li.append(contain);
             li.append(nav);
@@ -125,9 +132,20 @@ class Model {
           }
       })
     }
+         
   }
+  getUserlist(callback){
+    fetch('http://localhost/dokumentenFreigabe-backend/admin/listUsers',{
+      method: 'GET',
+     })
+    .then(response => response.json())    
+    .then(data => {
+      console.log(data);
+      callback(data);
+  })
+}
   
-  bindSelectedVideo(){
+bindSelectedVideo(){
     this.commandList.addEventListener('click', event => {
       event.preventDefault();
       console.log("fired " + event.target.textContent);
@@ -148,6 +166,93 @@ class Model {
     });
   }
  
+ 
+   dropContextMenu(data){
+    this.div_menu.addEventListener('contextmenu', event => {
+      var cmenu = true;
+      this.contextmenue(cmenu, event, data);
+      event.preventDefault();
+      console.log("fired " + event.target.textContent);
+      document.addEventListener('mousedown', event  => {
+        event.preventDefault(); 
+        var button = event.button;
+        if ( button === 1){
+          console.log("button clicked");
+          this.hideContextMenu();
+        }
+       
+       })
+    
+      document.addEventListener('keydown', event  => {
+        if (event.code === 'Escape') {
+            console.log("keybord clicked "+ event.code);
+            this.hideContextMenu();
+            console.log("menu hidden");
+        }
+      
+      });
+    
+
+    });
+   }  
+
+  
+  hideContextMenu(){
+    this.div.remove();
+    }
+    
+    getPosition(e) {
+    var posx = 0;
+    var posy = 0;
+    
+    if (!e) var e = window.event;
+     
+      posx = e.clientX ;
+                         
+      posy = e.clientY ; 
+    
+    console.log('position handled');
+    return {
+      x: posx,
+      y: posy
+    }
+    }
+    
+contextmenue(cmenu,e,data){
+
+  //build the dom-elements here:
+  if(!cmenu || cmenu === null) return true;
+  var obj = this;
+  
+  this.div.setAttribute("id", "context");
+ 
+    this.div = this.createElement('div', 'absolute');
+    const ul = this.createElement('ul');
+    data.forEach(value => {
+     
+    
+      const li_0 = this.createElement('li');
+      const span_0 = this.createElement('span', 'span_0');
+      span_0.textContent= value.name;
+      li_0.append(span_0);
+      li_0.style.margin = 0;
+      li_0.style.background = '#fff2df';
+      li_0.style.borderBottom = '1px solid #dd0074';
+      
+      
+      ul.append(li_0);
+      this.div.append(ul);
+    })
+   
+  var menuPosition = this.getPosition(e);
+  console.log(menuPosition);
+  document.body.append(this.div);
+  this.div.style.position = 'absolute';
+  this.div.style.left = menuPosition.x + "px";
+  this.div.style.top = menuPosition.y + "px";
+  
+  return false;
+  }
   }
   
   
@@ -158,8 +263,13 @@ class Model {
     var obj = this;
     this.model.getData(function(data){
       obj.view.displayData(data);
+      
     });
     this.view.bindSelectedVideo();
+    this.view.getUserlist(function(data){
+      obj.view.dropContextMenu(data);
+    });
+   
     
   }
   }

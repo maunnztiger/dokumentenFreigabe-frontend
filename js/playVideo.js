@@ -1,11 +1,8 @@
-class Model {
+  class Model {
   
     constructor() {
   
     }
-  
-     
-    
   }
   
   class View {
@@ -14,7 +11,7 @@ class Model {
   
     // The title of the app
     this.headline = this.createElement('h1');
-    this.headline.textContent = 'Video-Liste';
+    this.headline.textContent = 'Video-Display';
     this.title = this.createElement('h2')
     this.commandList = this.createElement('ul', 'command-list')
     this.commandList.style.top = '10';         
@@ -38,13 +35,11 @@ class Model {
   
   displayVideo(){
    
-    var url ="http://localhost/dokumentenFreigabe-backend/admin/playVideo";
-      
-           
-            this.video = document.getElementById('video');         
-            this.video.src = url;
-            this.video.style.display = 'block';
-    }
+    var url ="http://localhost/dokumentenFreigabe-backend/admin/playVideo?" + new Date().toISOString().substr(11, 8);
+    this.video = document.getElementById('video');         
+    this.video.src = url;
+    this.video.style.display = 'block';
+  }
   
 }
   
@@ -102,7 +97,6 @@ function togglePlay() {
     video.play();
   } else {
     video.pause();
-    
   }
 }
 

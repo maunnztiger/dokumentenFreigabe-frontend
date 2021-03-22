@@ -23,7 +23,7 @@ class View {
     this.div1 = this.createElement('div');
     this.title = this.createElement('h2');
     this.title.style.position = 'relative';
-    this.title.textContent = 'Dokumentenfreigabe';
+    this.title.textContent = 'Login';
     this.div1.style.float = 'left';
     this.div1.append(this.title);
     this.list = this.createElement('ul', 'list')
@@ -43,52 +43,7 @@ class View {
     return element;
   }
 
-  displayData(data){
-    console.log("displayed", data);
-    const div = this.createElement('div', 'videos');
-
-
-    if (data.length === 0) {
-      const p = this.createElement('p');
-      p.textContent = 'No data send!';
-      this.list.append(p);
-    } else {
-      data.forEach(value => {
-        const li = this.createElement('li');
-        li.style.width = '40%';
-        li.style.float = 'right';
-        if(value.endsWith('jpg')){
-        
-          console.log("true "+value);
-          const img = this.createElement('img',  'image');
-          img.src = value;
-          img.style.alignItems = 'left';
-          img.style.display = 'flex';
-          img.style.felxDirection = 'column';
-          img.style.margin = '2,5%';
-          img.style.padding = '0%';
-          img.style.width = '100%';
-          
-          this.list.append(img);
-        } 
-      
-         if(value.endsWith('jpg') == false){
-          this.div2 = this.createElement('div');
-          this.div2.style.width = '40%';
-          this.div2.style.float = 'right';
-          const span = this.createElement('span');
-          span.textContent = value;
-          
-          li.append(span);        
-          this.div2.append(li);
-          this.list.append(this.div2);
-
-        }
-      })
-    }
-
-   
- }
+  
 
  sendLoginData(){
        
@@ -127,12 +82,8 @@ class Controller {
   constructor(model, view) {
     this.model = model;
     this.view = view;
-    var obj = this;
-    this.model.getData(function(data){
-      obj.view.displayData(data)
-    });
     this.view.sendLoginData();
-    }
+  }
    
 }
 
