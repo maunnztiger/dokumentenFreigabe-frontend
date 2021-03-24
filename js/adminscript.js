@@ -99,7 +99,7 @@ const pdf = document.getElementsByClassName('span_0')[0];
 pdf.addEventListener('click', event => {
     event.preventDefault();
     setTimeout(function(){
-      document.location.href = "getPDF.html";
+      document.location.href = "listPDF-files.html";
     },500);
   });
 
@@ -206,7 +206,7 @@ const ul = this.createElement('ul');
 
 const li_0 = this.createElement('li');
 const span_0 = this.createElement('span', 'span_0');
-span_0.textContent= 'Get-PDF';
+span_0.textContent= 'Get-PDF-List';
 li_0.append(span_0);
 li_0.style.margin = 0;
 li_0.style.background = '#fff2df';
