@@ -69,11 +69,16 @@ class Model {
       p.textContent = 'No Data passed!';
       this.commandList.append(p);
     } else {
+      this.nav = this.createElement('nav', 'nav_menu');
+      this.nav.style.width = '100%';
+      this.nav.style.padding = '2%';
+      this.nav.style.float = 'left';
+      const span2 = this.createElement('span');
+      span2.textContent = 'Rechtsklick zum Freischalten!';
+      this.nav.append(span2);
+      this.commandList.append(this.nav);
       data.forEach(value => {
-        this.div_menu = this.createElement('div', 'div_menu');
-        this.div_menu.style.width = '100%';
-        this.div_menu.style.padding = '2%';
-        this.div_menu.style.float = 'left';
+       
         const li = this.createElement('li');
         li.style.background ='#aaabf6';
         if(value.image.endsWith('jpg')){
@@ -95,10 +100,8 @@ class Model {
           div_img.append(this.img);
           
          
-          const span2 = this.createElement('span');
-          span2.textContent = ' Video freischalten für: right click!';
-          this.div_menu.append(span2);
-          this.commandList.append(this.div_menu, div_img);
+        
+          this.commandList.append(div_img);
           this.commandList.style.width = '100%';
 
           
@@ -128,14 +131,16 @@ class Model {
             li.append(contain);
             li.append(nav);
             div_two.append(li);
+          
             this.commandList.append(div_two);
+           
           }
       })
     }
          
   }
   getUserlist(callback){
-    fetch('http://localhost/dokumentenFreigabe-backend/admin/listUsers',{
+    fetch('http://localhost/dokumentenFreigabe-backend/admin/getNonAdminUsers',{
       method: 'GET',
      })
     .then(response => response.json())    
@@ -168,10 +173,11 @@ bindSelectedVideo(){
  
  
    dropContextMenu(data){
-    this.div_menu.addEventListener('contextmenu', event => {
+    this.commandList.addEventListener('contextmenu', event => {
+      event.preventDefault();
       var cmenu = true;
       this.contextmenue(cmenu, event, data);
-      event.preventDefault();
+      
       console.log("fired " + event.target.textContent);
       document.addEventListener('mousedown', event  => {
         event.preventDefault(); 
@@ -181,7 +187,7 @@ bindSelectedVideo(){
           this.hideContextMenu();
         }
        
-       })
+       });
     
       document.addEventListener('keydown', event  => {
         if (event.code === 'Escape') {
@@ -191,6 +197,8 @@ bindSelectedVideo(){
         }
       
       });
+
+      
     
 
     });
@@ -242,6 +250,23 @@ contextmenue(cmenu,e,data){
       
       ul.append(li_0);
       this.div.append(ul);
+      span_0.addEventListener('click', event => {
+        event.preventDefault();
+        console.log(event.target.textContent);
+        var baseURL = "http://localhost/dokumentenFreigabe-backend/";
+        var url  = baseURL+ "admin/changePermission"
+        var params = { 
+          userName: event.target.textContent,
+        };
+        
+        var posting = $.post(url, params);
+        posting.done(function(data){
+          if(data === 'true'){
+            console.log(event.target.textContent+'s '+'Permission successfully updated');
+          }
+          
+        })
+      })
     })
    
   var menuPosition = this.getPosition(e);
