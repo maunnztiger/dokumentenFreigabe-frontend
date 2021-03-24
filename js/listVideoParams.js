@@ -6,8 +6,7 @@ class Model {
   
      
     getData(callback){
-       
-      fetch('http://localhost/dokumentenFreigabe-backend/admin/listVideoParams',{
+       fetch('http://localhost/dokumentenFreigabe-backend/admin/listVideoParams',{
         method: 'GET',
        })
       .then(response => response.json())    
@@ -16,7 +15,7 @@ class Model {
           var images = [];
           images.push("../images/images/BlackbookSessions.jpg");
           images.push("../images/images/Detroit.jpg"); 
-         this.object = [];
+          this.object = [];
           for(var i =0; i< data['videos'].length; i++){
                 this.object.push({
                     name: data['videos'][i],
@@ -26,10 +25,9 @@ class Model {
                 })
             }
             callback(this.object);
-        });
-
+      });
     }
-  }
+}
   
   class View {
   constructor() {
@@ -82,8 +80,6 @@ class Model {
         const li = this.createElement('li');
         li.style.background ='#aaabf6';
         if(value.image.endsWith('jpg')){
-        
-        
           this.img = this.createElement('img',  'image');
           this.img.src = value.image;
           this.img.textContent = value.name;
@@ -93,51 +89,39 @@ class Model {
           this.img.style.padding = '1%';
           this.img.style.width = '100%';
           const div_img = this.createElement('div')
-          
           div_img.style.float = 'left';
           div_img.style.width = '100%';
           div_img.style.padding = '1%';
           div_img.append(this.img);
-          
-         
-        
           this.commandList.append(div_img);
           this.commandList.style.width = '100%';
-
-          
-
         } 
       
-         if(value.name.endsWith('jpg') == false){
-            const div_two = this.createElement('div');
-          
-            const contain = this.createElement('div');
-            const nav = this.createElement('nav');
-            nav.style.margin = '1%';
-            nav.textContent = parseInt(value.plays);
-           
-            contain.style.width = '2.4%';
-            contain.style.height = '10px';
-            contain.style.backgroundColor = 'black';
-            contain.style.background =  'linear-gradient(to right bottom, #aaabf6 50%, black 50%)';
-            contain.style.transform = 'rotate(-45deg)';
-            const span = this.createElement('span');
-            span.textContent = value.name;
-            li.style.margin = '2.5%';
-            li.style.padding = '5%';
-            li.style.width = '90%';
-            li.textContent = value.time;
-            li.append(span);
-            li.append(contain);
-            li.append(nav);
-            div_two.append(li);
-          
-            this.commandList.append(div_two);
-           
-          }
+        if(value.name.endsWith('jpg') == false){
+          const div_two = this.createElement('div');
+          const contain = this.createElement('div');
+          const nav = this.createElement('nav');
+          nav.style.margin = '1%';
+          nav.textContent = parseInt(value.plays);
+          contain.style.width = '2.4%';
+          contain.style.height = '10px';
+          contain.style.backgroundColor = 'black';
+          contain.style.background =  'linear-gradient(to right bottom, #aaabf6 50%, black 50%)';
+          contain.style.transform = 'rotate(-45deg)';
+          const span = this.createElement('span');
+          span.textContent = value.name;
+          li.style.margin = '2.5%';
+          li.style.padding = '5%';
+          li.style.width = '90%';
+          li.textContent = value.time;
+          li.append(span);
+          li.append(contain);
+          li.append(nav);
+          div_two.append(li);
+          this.commandList.append(div_two);
+        }
       })
     }
-         
   }
   getUserlist(callback){
     fetch('http://localhost/dokumentenFreigabe-backend/admin/getNonAdminUsers',{
@@ -158,8 +142,7 @@ bindSelectedVideo(){
       var baseURL = "http://localhost/dokumentenFreigabe-backend/";
       var url  = baseURL+ "admin/playVideo"
       var params = { 
-          name: event.target.textContent,
-         
+            name: event.target.textContent,
           };
       var posting = $.post(url, params);
       posting.done( function(data){
@@ -171,13 +154,11 @@ bindSelectedVideo(){
     });
   }
  
- 
-   dropContextMenu(data){
+ dropContextMenu(data){
     this.commandList.addEventListener('contextmenu', event => {
       event.preventDefault();
       var cmenu = true;
       this.contextmenue(cmenu, event, data);
-      
       console.log("fired " + event.target.textContent);
       document.addEventListener('mousedown', event  => {
         event.preventDefault(); 
@@ -186,8 +167,7 @@ bindSelectedVideo(){
           console.log("button clicked");
           this.hideContextMenu();
         }
-       
-       });
+      });
     
       document.addEventListener('keydown', event  => {
         if (event.code === 'Escape') {
@@ -195,50 +175,37 @@ bindSelectedVideo(){
             this.hideContextMenu();
             console.log("menu hidden");
         }
-      
       });
-
-      
-    
-
     });
    }  
 
   
   hideContextMenu(){
-    this.div.remove();
-    }
+      this.div.remove();
+  }
     
-    getPosition(e) {
+  getPosition(e) {
     var posx = 0;
     var posy = 0;
-    
     if (!e) var e = window.event;
-     
       posx = e.clientX ;
-                         
       posy = e.clientY ; 
-    
-    console.log('position handled');
+      console.log('position handled');
     return {
       x: posx,
       y: posy
     }
-    }
+  }
     
 contextmenue(cmenu,e,data){
 
   //build the dom-elements here:
   if(!cmenu || cmenu === null) return true;
-  var obj = this;
   
   this.div.setAttribute("id", "context");
- 
-    this.div = this.createElement('div', 'absolute');
-    const ul = this.createElement('ul');
-    data.forEach(value => {
-     
-    
+  this.div = this.createElement('div', 'absolute');
+  const ul = this.createElement('ul');
+  data.forEach(value => {
       const li_0 = this.createElement('li');
       const span_0 = this.createElement('span', 'span_0');
       span_0.textContent= value.name;
@@ -246,8 +213,6 @@ contextmenue(cmenu,e,data){
       li_0.style.margin = 0;
       li_0.style.background = '#fff2df';
       li_0.style.borderBottom = '1px solid #dd0074';
-      
-      
       ul.append(li_0);
       this.div.append(ul);
       span_0.addEventListener('click', event => {
@@ -258,26 +223,24 @@ contextmenue(cmenu,e,data){
         var params = { 
           userName: event.target.textContent,
         };
-        
         var posting = $.post(url, params);
         posting.done(function(data){
           if(data === 'true'){
             console.log(event.target.textContent+'s '+'Permission successfully updated');
           }
-          
         })
       })
     })
    
-  var menuPosition = this.getPosition(e);
-  console.log(menuPosition);
-  document.body.append(this.div);
-  this.div.style.position = 'absolute';
-  this.div.style.left = menuPosition.x + "px";
-  this.div.style.top = menuPosition.y + "px";
+    var menuPosition = this.getPosition(e);
+    console.log(menuPosition);
+    document.body.append(this.div);
+    this.div.style.position = 'absolute';
+    this.div.style.left = menuPosition.x + "px";
+    this.div.style.top = menuPosition.y + "px";
   
-  return false;
-  }
+    return false;
+    }
   }
   
   
@@ -294,9 +257,7 @@ contextmenue(cmenu,e,data){
     this.view.getUserlist(function(data){
       obj.view.dropContextMenu(data);
     });
-   
-    
-  }
+   }
   }
   
   const app = new Controller(new Model(),new View() );
