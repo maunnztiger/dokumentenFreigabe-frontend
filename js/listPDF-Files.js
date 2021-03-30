@@ -5,7 +5,7 @@ class Model {
     }
     getData(callback){
      
-        fetch('http://localhost/dokumentenFreigabe-backend/admin/getPDFFileNames',{
+        fetch('http://localhost/dokumentenFreigabe-backend/index/getPDFFileNames',{
           method: 'GET',
          })
         .then(response => response.json())    
@@ -80,8 +80,10 @@ class View {
         var posting = $.post(url, params);
         posting.done(function(){
             this.embed = document.getElementById('embed');
-          
-            this.embed.src = url;
+            setTimeout(function(){
+               this.embed.src = url;
+            }, 1000)
+       
             this.embed.style.display = "block";
             obj.list.append(this.embed); 
         

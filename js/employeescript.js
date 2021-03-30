@@ -96,15 +96,21 @@ class Model {
     });
   
   
-    const displayPDF = document.getElementsByClassName('span_1')[0];
-    displayPDF.addEventListener('click', event => {
+    const displayPDFList = document.getElementsByClassName('span_1')[0];
+    displayPDFList.addEventListener('click', event => {
       event.preventDefault();
       setTimeout(function(){
         document.location.href = "displayPDF.html";
       },500);
     });
   
-    
+    const videoList = document.getElementsByClassName('span_2')[0];
+    videoList.addEventListener('click', event => {
+      event.preventDefault();
+      setTimeout(function(){
+        document.location.href = "listVideoParams.html";
+      },500);
+    });
     
     const logout =  document.getElementsByClassName('span_3')[0];
     logout.addEventListener('click', event => {
@@ -162,20 +168,27 @@ class Model {
   
   const li_1 = this.createElement('li');
   const span_1 = this.createElement('span', 'span_1');
-  span_1.textContent= 'display PDF';
+  span_1.textContent= 'display PDF-List';
   li_1.append(span_1);
   li_1.style.margin = 0;
   li_1.style.background = '#fff2df';
   li_1.style.borderBottom = '1px solid #dd0074';
   
-  
+  const li_2 = this.createElement('li');
+  const span_2 = this.createElement('span', 'span_2');
+  span_2.textContent= 'Get Video-List';
+  li_2.append(span_2);
+  li_2.style.margin = 0;
+  li_2.style.background = '#fff2df';
+  li_2.style.borderBottom = '1px solid #dd0074';
+
   const li_3 = this.createElement('li');
   const span_3 = this.createElement('span', 'span_3');
   span_3.textContent= 'Abmelden';
   li_3.style.background = '#fff2df';
   li_3.append(span_3);
   
-  ul.append(li_1,li_3);
+  ul.append(li_1,li_2,li_3);
   this.div.append(ul);
   
   

@@ -34,7 +34,7 @@
   }
   
   displayVideo(){
-    var url ="http://localhost/dokumentenFreigabe-backend/admin/playVideo?" + new Date().toISOString().substr(11, 8);
+    var url ="http://localhost/dokumentenFreigabe-backend/index/playVideo?" + new Date().toISOString().substr(11, 8);
     this.video = document.getElementById('video');         
     this.video.src = url;
     this.video.style.display = 'block';
