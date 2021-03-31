@@ -133,7 +133,8 @@ class Model {
           if(data === 'true'){
             alert(event.target.textContent+'s '+'Permission successfully updated for '+value.name);
             objekt.hideContextMenu();
-          }
+          } 
+        
 
 
         })
@@ -203,7 +204,12 @@ class Model {
     .then(response => response.json())    
     .then(data => {
       console.log(data);
-      callback(data);
+      if(typeof data !== 'string'){
+        callback(data);
+      }
+      if(typeof data === 'string'){
+        return;
+      }
   })
 }
   
