@@ -35,24 +35,23 @@
   
   displayVideo(){
     var url ="http://localhost/dokumentenFreigabe-backend/index/playVideo?" + new Date().toISOString().substr(11, 8);
-    this.video = document.getElementById('video');         
-    this.video.src = url;
-    this.video.style.display = 'block';
-  }
-  
-}
-  
-  class Controller {
-  constructor(model, view) {
-    this.model = model;
-    this.view = view;
-    this.view.displayVideo();
- }
-}
-  
-  const app = new Controller(new Model(),new View() );
-         
-         
+    var obj = this;
+    jQuery(document).ready(function($)
+    {
+            $.ajax({
+                type: 'GET',
+                url: url,
+            }).done(function(data) {
+                // Aktionen bei Erfolg
+                console.log(data);
+                if(data === ""){
+                  alert('Keine Berechtigung!');
+                  obj.video.style.display = 'none';
+                }  else {
+                  obj.video = document.getElementById('video');         
+                  obj.video.src = url;
+                  obj.video.style.display = 'block';
+                           
         
 // Select elements here
 
@@ -345,3 +344,29 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 document.addEventListener('keyup', keyboardShortcuts);
+                }
+              
+            }).fail(function(data) {
+                // Aktionen bei einem Fehler
+                console.log('fail: '+data);			
+            });
+      
+        /**/
+    });
+   
+    
+   
+  }
+  
+}
+  
+  class Controller {
+  constructor(model, view) {
+    this.model = model;
+    this.view = view;
+    this.view.displayVideo();
+ }
+}
+  
+  const app = new Controller(new Model(),new View() );
+         
