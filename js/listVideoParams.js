@@ -103,8 +103,9 @@ class Model {
               var cmenu = true;
               if(!cmenu || cmenu === null) return true;
   
-              objekt.div.setAttribute("id", "context");
+           
               objekt.div = objekt.createElement('div', 'absolute');
+              objekt.div.setAttribute("id", "context");
               const ul = objekt.createElement('ul');
               data.forEach(values => {
               const li_0 = objekt.createElement('li');

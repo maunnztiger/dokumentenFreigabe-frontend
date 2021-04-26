@@ -44,9 +44,16 @@
             }).done(function(data) {
                 // Aktionen bei Erfolg
                 console.log(data);
-                if(data === ""){
-                  alert('Keine Berechtigung!');
+                if(data === "Keine Berechtigung!"){
+                  obj.video = document.getElementById('video'); 
                   obj.video.style.display = 'none';
+                  const li = obj.createElement('li');
+                  const span = obj.createElement('span');
+                  span.textContent = data;
+                  li.append(span);
+                  obj.commandList.append(li);
+                 
+
                 }  else {
                   obj.video = document.getElementById('video');         
                   obj.video.src = url;
