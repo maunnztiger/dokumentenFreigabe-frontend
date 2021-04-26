@@ -157,7 +157,7 @@ class View {
         console.log("fired " + event.target.textContent);
         
         var baseURL = "http://localhost/dokumentenFreigabe-backend/";
-        var url  = baseURL+ "admin/getPdfBinary"
+        var url  = baseURL+ "index/getPdfBinary"
         var params = { 
           fileName: event.target.textContent,
            
@@ -172,9 +172,10 @@ class View {
        
             this.embed.style.display = "block";
             obj.list.append(this.embed); 
+          
         
                       
-        })    
+        })
        
       });
  }
