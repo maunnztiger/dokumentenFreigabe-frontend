@@ -10,15 +10,10 @@
   <body>
   	<div id="root" name="xmlView.phtml"></div>
       <embed  width="600px" height="845" id="embed" style="display: none" />
-      <form action="">
-        <input 
-        id="myFile" 
-        name="filename"
-        accept="pdf/*"
-        >
-        <button type="submit">..upload your file</button>
+      <form action="" id="myFile" name="myFile" enctype="multipart/form-data">
+        <input type="file" id="uploadFile" name="filename"accept="">
+        <button id="submit">..upload your file</button>
       </form>
-      <div id="output"></div>
     <script src="../js/listPDF-Files.js"></script>
   </body>
 </html>
