@@ -20,9 +20,13 @@ class View {
 
     // The title of the app
     this.div1 = this.createElement('div');
+    this.uplaodForm = document.getElementById('myFile');
+    this.uplaodForm.style.position = 'relative';
+    this.uplaodForm.style.width = '50%';
     this.list = this.createElement('ul', 'list')
     this.list.append(this.div1);
     this.app.append(this.list);
+  
   }
   // Create an element with an optional CSS class
   createElement(tag, className) {
@@ -49,6 +53,7 @@ class View {
     this.list.append(p);
   } else {
     data.forEach(pdfName => {
+    
       const li = this.createElement('li');
       li.style.background = '#5300e8';
       if(pdfName.endsWith('jpg') == false){
@@ -226,6 +231,37 @@ this.div.style.top = menuPosition.y + "px";
 return false;
 }
 
+uploadFile(){
+ 
+  this.submit = document.getElementById("submit");
+
+
+  this.submit.addEventListener('click', event => {
+  event.preventDefault();
+  this.file = document.getElementById("myFile");
+    let body = new FormData(this.file);
+    body.append('myfile', $('#uploadFile')[0].files[0])
+    console.log($('#uploadFile')[0].files[0]);
+    var baseURL = "http://localhost/dokumentenFreigabe-backend/";
+    var url = baseURL + "index/uploadFile"
+    $.ajax({
+      url: url,  
+      type: 'POST',
+      data: body,
+      success:function(data){
+        setTimeout(function(){
+          document.location.reload();
+        },2000);
+    },
+    cache: false,
+    contentType: false,
+    processData: false
+  });
+
+  });
+  
+}
+
 
 }
 class Controller {
@@ -237,7 +273,7 @@ class Controller {
         obj.view.displayData(data);
         obj.view.bindSelectedPDF();
     });
-  
+    this.view.uploadFile();
         
     }
 }
