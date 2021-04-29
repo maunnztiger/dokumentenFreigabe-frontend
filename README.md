@@ -1,6 +1,6 @@
 # Dokumenten- Freigabe frontend: Beschreibung
 
-Das Frontend der Dukmenten-Freigabe bsteht komplett aus nativ geschriebenen HTML5, CSS3 und Jvascript-Modulen. Im js-Ordner sind die Javascript-Dateien angelegt, wobei jede HTML-View mindestens eine Javascript-Datei importiert und somit eine kleine Bibliothek an Frontend-Dateien entsteht.
+Das Frontend der Dukmenten-Freigabe besteht komplett aus nativ geschriebenen HTML5, CSS3 und Jvascript-Modulen. Im js-Ordner sind die Javascript-Dateien angelegt, wobei jede HTML-View mindestens eine Javascript-Datei importiert und somit eine kleine Bibliothek an Frontend-Dateien entsteht.
 
 Hier wurde in Javascript, um die Übersicht besser zu gewährleisten, mit einer MVC-Struktur gearbeitet. Das heißt, ich habe ein Model, welches (unter anderem) Daten holt un dann, ggfs per callback, an die View weiterleitet, wobei dies konkret im Controller passiert. Stellenweise kann es vorkommen, das Datenabfragen an das Backend auch direkt in der View passieren, sofern sie in einem Prozess stattfinden, der direkt an die Präsenation gekoppelt ist, wie zum Beispiel die User aus der Datenbank für das Contextmenü einer Content-Freigabe:
 
