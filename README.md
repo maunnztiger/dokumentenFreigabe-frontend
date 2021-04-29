@@ -97,5 +97,55 @@ Aus Sicherheitsgründen wird ganz am Anfang auf der ersten index.html, welche di
 Da wir in der Datenbank verschiedene Benutzergruppen haben, die beim Login ausgelesen werden, war es von Vorteil, wenn diese auch ihre eigene View bekommen.
 Employee und Customers View sind aktuell noch in Bearbeitung. Der eigentliche Unterscheid bei den entsprechenden Views liegt im Contextmenü der jeweiligen Startseite, so dass ein Admin vielmehr Optionen im Contextmenü hat, wie z.B. User anzeigen, ändern, anlegen oder löschen.
 
+# Das Design
+
+Das Design wird jeweils über CSS3 Stylesheets erstellt. Zusätzlich werden einzelne Design Elemente noch per Javascript-Funktion 'style' verändert, da einzelne DOM-Elemente, wie bspw. das Contextmenü erst im Prozess erzeugt werden.
+
+{
+    
+
+contextmenue(cmenu,e){
+
+//build the dom-elements here:
+if(!cmenu || cmenu === null) return true;
+
+this.div = this.createElement('div', 'absolute');
+this.div.setAttribute("id", "context");
+
+const ul = this.createElement('ul');
+
+const li_0 = this.createElement('li');
+const span_0 = this.createElement('span', 'span_0');
+span_0.textContent= 'Get-PDF-List';
+li_0.append(span_0);
+li_0.style.margin = 0;
+li_0.style.background = '#fff2df';
+li_0.style.borderBottom = '1px solid #dd0074';
 
 
+const li_1 = this.createElement('li');
+const span_1 = this.createElement('span', 'span_1');
+span_1.textContent= 'User-Liste';
+li_1.append(span_1);
+li_1.style.margin = 0;
+li_1.style.background = '#fff2df';
+li_1.style.borderBottom = '1px solid #dd0074';
+
+
+const li_2 = this.createElement('li');
+const span_2 = this.createElement('span', 'span_2');
+span_2.textContent= 'Get XML-Object';
+li_2.append(span_2);
+li_2.style.margin = 0;
+li_2.style.background = '#fff2df';
+li_2.style.borderBottom = '1px solid #dd0074';
+
+const li_3 = this.createElement('li');
+const span_3 = this.createElement('span', 'span_3');
+span_3.textContent= 'Get Video List';
+li_3.style.background = '#fff2df';
+li_3.style.margin =0;
+li_3.style.borderBottom = '1px solid #dd0074';
+li_3.append(span_3);
+
+}
