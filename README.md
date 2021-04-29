@@ -102,7 +102,6 @@ Employee und Customers View sind aktuell noch in Bearbeitung. Der eigentliche Un
 Das Design wird jeweils über CSS3 Stylesheets erstellt. Zusätzlich werden einzelne Design Elemente noch per Javascript-Funktion 'style' verändert, da einzelne DOM-Elemente, wie bspw. das Contextmenü erst im Prozess erzeugt werden.
 
 {
-    
 
 contextmenue(cmenu,e){
 
@@ -148,4 +147,5 @@ li_3.style.margin =0;
 li_3.style.borderBottom = '1px solid #dd0074';
 li_3.append(span_3);
 
+}
 }
