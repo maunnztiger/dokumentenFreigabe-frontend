@@ -12,20 +12,48 @@ class Model {
       .then(response => response.json())    
       .then(data => {
           console.log(data)
-          var images = [];
-          images.push("../images/images/BlackbookSessions.jpg");
-          images.push("../images/images/Detroit.jpg"); 
-          this.object = [];
-          for(var i =0; i< data['videos'].length; i++){
-                this.object.push({
-                    name: data['videos'][i],
-                    time: data['videoDurationTime'][i],
-                    image: images[i],
-                    plays : data['plays'][i]
+          if(typeof data.data === 'undefined' && typeof data['videoNames'] !== 'undefined'){
+            var images = [];
+         
+            this.object = [];
+            for(var i =0; i< data['videoNames'].length; i++){
+              if(this.imageExists("../images/images/"+data['videoNames'][i]+".jpg"))
+              images.push("../images/images/"+data['videoNames'][i]+".jpg");   
+              this.object.push({
+                      name: data['videoNames'][i],
+                      time: data['videoDurationTime'][i],
+                      image: images[i],
+                      plays : data['plays'][i]
+                  })
+              }
+              callback(this.object);
+          } 
+          
+          
+          if(data.data === "no data loaded"){
+           
+            
+            this.object = [];
+          
+              if(this.imageExists("../images/images/default.jpg"))
+                
+              this.object.push({
+                     image: "../images/images/default.jpg",
                 })
-            }
-            callback(this.object);
+              
+              callback(this.object);
+          }
+          
       });
+    }
+    imageExists(image_url){
+
+      var http = new XMLHttpRequest();
+  
+      http.open('HEAD', image_url, false);
+      http.send();
+  
+      return http.status != 404;
     }
 }
   
@@ -67,14 +95,18 @@ class Model {
       p.textContent = 'No Data passed!';
       this.commandList.append(p);
     } else {
-      this.nav = this.createElement('nav', 'nav_menu');
-      this.nav.style.width = '100%';
-      this.nav.style.padding = '2%';
-      this.nav.style.float = 'left';
-      const span2 = this.createElement('span');
-      span2.textContent = 'Rechtsklick zum Freischalten!';
-      this.nav.append(span2);
-      this.commandList.append(this.nav);
+
+      if(data[0].image !== "../images/images/default.jpg"){
+        this.nav = this.createElement('nav', 'nav_menu');
+        this.nav.style.width = '100%';
+        this.nav.style.padding = '2%';
+        this.nav.style.float = 'left';
+        const span2 = this.createElement('span');
+        span2.textContent = 'Rechtsklick zum Freischalten!';
+        this.nav.append(span2);
+        this.commandList.append(this.nav);
+      }
+    
       data.forEach(value => {
        
         const li = this.createElement('li');
@@ -82,7 +114,10 @@ class Model {
         if(value.image.endsWith('jpg')){
           this.img = this.createElement('img',  'image');
           this.img.src = value.image;
-          this.img.textContent = value.name;
+          if(typeof value.name !== 'undefined'){
+            this.img.textContent = value.name;
+          }
+        
           this.img.style.display = 'inline-block';
           this.img.style.felxDirection = 'column';
           this.img.style.margin = '1,5%';
@@ -170,31 +205,36 @@ class Model {
 })
        
        
-} 
-      
-        if(value.name.endsWith('jpg') == false){
-          const div_two = this.createElement('div');
-          const contain = this.createElement('div');
-          const nav = this.createElement('nav');
-          nav.style.margin = '1%';
-          nav.textContent = parseInt(value.plays);
-          contain.style.width = '2.4%';
-          contain.style.height = '10px';
-          contain.style.backgroundColor = 'black';
-          contain.style.background =  'linear-gradient(to right bottom, #aaabf6 50%, black 50%)';
-          contain.style.transform = 'rotate(-45deg)';
-          const span = this.createElement('span');
-          span.textContent = value.name;
-          li.style.margin = '2.5%';
-          li.style.padding = '5%';
-          li.style.width = '90%';
-          li.textContent = value.time;
-          li.append(span);
-          li.append(contain);
-          li.append(nav);
-          div_two.append(li);
-          this.commandList.append(div_two);
-        }
+} {
+if(typeof value.name !== 'undefined'){
+  if(value.name.endsWith('jpg') == false){
+    const div_two = this.createElement('div');
+    const contain = this.createElement('div');
+    const nav = this.createElement('nav');
+    nav.style.margin = '1%';
+    nav.textContent = parseInt(value.plays);
+    contain.style.width = '2.4%';
+    contain.style.height = '10px';
+    contain.style.backgroundColor = 'black';
+    contain.style.background =  'linear-gradient(to right bottom, #aaabf6 50%, black 50%)';
+    contain.style.transform = 'rotate(-45deg)';
+    const span = this.createElement('span');
+   
+    span.textContent = value.name;
+    li.style.margin = '2.5%';
+    li.style.padding = '5%';
+    li.style.width = '90%';
+
+    li.textContent = value.time;
+    li.append(span);
+    li.append(contain);
+    li.append(nav);
+    div_two.append(li);
+    this.commandList.append(div_two);
+    }
+}
+}
+       
       })
     }
   }

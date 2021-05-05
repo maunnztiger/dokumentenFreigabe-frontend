@@ -133,8 +133,17 @@ pdf.addEventListener('click', event => {
     },500);
      
   });
+
+  const videoUpload = document.getElementsByClassName('span_4')[0];
+  videoUpload.addEventListener('click', event => {
+    var baseURL = "http://localhost/dokumentenFreigabe-frontend/"
+    var url = baseURL + "admin/videoUpload.html";
+    setTimeout(function(){
+      document.location.href = url;
+    }, 500);
+  });
   
-  const logout =  document.getElementsByClassName('span_4')[0];
+  const logout =  document.getElementsByClassName('span_5')[0];
   logout.addEventListener('click', event => {
     event.preventDefault();
     console.log('logout fired');
@@ -240,11 +249,19 @@ li_3.append(span_3);
 
 const li_4 = this.createElement('li');
 const span_4 = this.createElement('span', 'span_4');
-span_4.textContent= 'Abmelden';
+span_4.textContent= 'Upload Video';
 li_4.style.background = '#fff2df';
+li_4.style.margin =0;
+li_4.style.borderBottom = '1px solid #dd0074';
 li_4.append(span_4);
 
-ul.append(li_0, li_1, li_2, li_3, li_4);
+const li_5 = this.createElement('li');
+const span_5 = this.createElement('span', 'span_5');
+span_5.textContent= 'Abmelden';
+li_5.style.background = '#fff2df';
+li_5.append(span_5);
+
+ul.append(li_0, li_1, li_2, li_3, li_4, li_5);
 this.div.append(ul);
 
 

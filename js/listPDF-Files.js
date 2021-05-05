@@ -281,10 +281,8 @@ uploadFile(){
       type: 'POST',
       data: body,
       success:function(data){
-        setTimeout(function(){
-          document.location.reload();
-        },2000);
-    },
+        console.log(data);
+      },
     cache: false,
     contentType: false,
     processData: false

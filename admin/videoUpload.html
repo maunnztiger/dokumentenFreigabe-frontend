@@ -8,8 +8,12 @@
     <link rel="stylesheet" href="../css/style.css"/>
   </head>
   <body>
-  	<div id="root" name="listVideoParams.html"></div>
-    <img style="display:none" id=myImage>
-    <script src="../js/listVideoParams.js"></script>
+  	<div id="root" name="adminView.phtml"></div>
+
+      <form action="" id="myFile" name="myFile" enctype="multipart/form-data">
+        <input type="file" id="uploadFile" name="filename"accept="">
+        <button id="submit">..upload your file</button>
+      </form>
+    <script src="../js/videoUpload.js"></script>
   </body>
 </html>
