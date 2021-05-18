@@ -9,7 +9,13 @@ class Model {
             method: 'GET',
            })
            .then(response => response.json())    
-           .then(data => callback(data));
+           .then(data => {
+            if(data !== null){
+              callback(data);
+            } else {
+              return;
+            }
+           });
          
       }
 }
@@ -80,7 +86,7 @@ class View {
           li_1.style.background = '#fff2df';
           li_1.style.borderBottom = '1px solid #dd0074';
           const span_1 = objekt.createElement('span','span_1');
-          span_1.textContent = 'PDF löschen';
+          span_1.textContent = 'Dokument löschen';
           li_1.append(span_1);
           ul_0.append(li_1);
           objekt.div2.append(ul_0);
@@ -88,9 +94,9 @@ class View {
           span_1.addEventListener('click', event => {
             event.preventDefault();
             var baseURL = "http://localhost/dokumentenFreigabe-backend/";
-            var url  = baseURL+ "admin/deletePDF"
+            var url  = baseURL+ "admin/deleteDocument"
             var params = { 
-                pdfName: docxName
+                docxName: docxName
             };
             console.log(params);
             var posting = $.post(url, params);
@@ -275,13 +281,16 @@ uploadFile(){
     body.append('myfile', $('#uploadFile')[0].files[0])
     console.log($('#uploadFile')[0].files[0]);
     var baseURL = "http://localhost/dokumentenFreigabe-backend/";
-    var url = baseURL + "index/uploadFile"
+    var url = baseURL + "index/uploadDocument"
     $.ajax({
       url: url,  
       type: 'POST',
       data: body,
       success:function(data){
         console.log(data);
+        setTimeout(function(){
+          document.location.reload();
+        },500);
       },
     cache: false,
     contentType: false,
