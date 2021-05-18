@@ -143,7 +143,15 @@ pdf.addEventListener('click', event => {
     }, 500);
   });
   
-  const logout =  document.getElementsByClassName('span_5')[0];
+  const wordDocuments =  document.getElementsByClassName('span_5')[0];
+  wordDocuments.addEventListener('click', event => {
+    event.preventDefault();
+    setTimeout(function(){
+      document.location.href = "http://localhost/dokumentenFreigabe-frontend/admin/word.html";
+    },500);
+  });
+
+  const logout =  document.getElementsByClassName('span_6')[0];
   logout.addEventListener('click', event => {
     event.preventDefault();
     console.log('logout fired');
@@ -257,11 +265,20 @@ li_4.append(span_4);
 
 const li_5 = this.createElement('li');
 const span_5 = this.createElement('span', 'span_5');
-span_5.textContent= 'Abmelden';
+span_5.textContent= 'Get Word Document List';
 li_5.style.background = '#fff2df';
+li_5.style.margin =0;
+li_5.style.borderBottom = '1px solid #dd0074';
 li_5.append(span_5);
 
-ul.append(li_0, li_1, li_2, li_3, li_4, li_5);
+const li_6 = this.createElement('li');
+const span_6 = this.createElement('span', 'span_6');
+span_6.textContent= 'Abmelden';
+li_6.style.background = '#fff2df';
+li_6.append(span_6);
+
+li_6.append(span_6);
+ul.append(li_0, li_1, li_2, li_3, li_4, li_5,li_6);
 this.div.append(ul);
 
 
