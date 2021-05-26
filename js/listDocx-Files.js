@@ -129,10 +129,10 @@ class View {
             event.preventDefault();
             console.log(event.target.textContent);
             var baseURL = "http://localhost/dokumentenFreigabe-backend/";
-            var url  = baseURL+ "admin/setPDFPermission"
+            var url  = baseURL+ "admin/setDocumentPermission"
             var params = { 
               userName: event.target.textContent,
-              pdfName: docxName
+              docxName: docxName
             };
             console.log(params);
             var posting = $.post(url, params);

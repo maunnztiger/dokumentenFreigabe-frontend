@@ -111,8 +111,16 @@ class Model {
         document.location.href = "listVideoParams.html";
       },500);
     });
+
+    const docx = document.getElementsByClassName('span_3')[0];
+    docx.addEventListener('click', event => {
+      event.preventDefault();
+      setTimeout(function(){
+        document.location.href = "word.html";
+      },500);
+    });
     
-    const logout =  document.getElementsByClassName('span_3')[0];
+    const logout =  document.getElementsByClassName('span_4')[0];
     logout.addEventListener('click', event => {
       event.preventDefault();
       console.log('logout fired');
@@ -184,11 +192,19 @@ class Model {
 
   const li_3 = this.createElement('li');
   const span_3 = this.createElement('span', 'span_3');
-  span_3.textContent= 'Abmelden';
-  li_3.style.background = '#fff2df';
+  span_3.textContent= 'Get Word Dokument List';
   li_3.append(span_3);
+  li_3.style.margin = 0;
+  li_3.style.background = '#fff2df';
+  li_3.style.borderBottom = '1px solid #dd0074';
+
+  const li_4 = this.createElement('li');
+  const span_4 = this.createElement('span', 'span_4');
+  span_4.textContent= 'Abmelden';
+  li_4.style.background = '#fff2df';
+  li_4.append(span_4);
   
-  ul.append(li_1,li_2,li_3);
+  ul.append(li_1, li_2, li_3, li_4);
   this.div.append(ul);
   
   
