@@ -138,7 +138,7 @@ class View {
             var posting = $.post(url, params);
             posting.done(function(data){
               if(data === 'true'){
-                alert(event.target.textContent+'s '+' PDF Permission successfully updated for '+pdfName);
+                alert(event.target.textContent+'s '+' PDF Permission successfully updated for '+docxName);
                 objekt.hideContextMenu();
               } 
             });

@@ -6,12 +6,32 @@
     <meta http-equiv="expires" content="0"/>
     <meta http-equiv="pragma" content="no-cache"/>
     <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-    <link rel="stylesheet" href="./css/style.css"/>
+    <link rel="stylesheet" href="./css/index.css"/>
   </head>
   <body>
   	<div id="root" name="adminView.phtml">
     <div id="dom-target" style="display: none">
       
+    </div>
+    <div class="center">
+      <button id="show-login">Login</button>
+    </div>
+    <div class="popup">
+      <div class="close-btn">&times;</div>
+      <div class="form">
+      <h2>Log in</h2>
+      <div class="form-element">
+        <label for="name">Username</label>
+        <input type="text" id="name" placeholder="Enter username">
+      </div>
+      <div class="form-element">
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="Enter password">
+      </div>
+      <div class="form-element">
+        <button id="submit">Sign in</button>
+      </div>
+    </div>
     </div>
     <script src="./js/script.js"></script>
   </body>

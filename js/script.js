@@ -43,13 +43,18 @@ class View {
     // The title of the app
     this.div1 = this.createElement('div');
     this.title = this.createElement('h2');
-    this.title.style.position = 'relative';
+    this.title.style.position = "absolute";
+    this.title.style.left = "33%";
+    this.title.style.position = 'absolute';
     this.title.textContent = 'Dokumentenfreigabe';
-    this.div1.style.float = 'left';
-    this.div1.append(this.title);
-    this.list = this.createElement('ul', 'list')
-    this.list.append(this.div1);
-    this.app.append(this.list);
+    this.div1.style.position = "absolute";
+    this.div1.style.top = '10%';
+    this.div1.style.left = '30%';
+    this.app.append(this.title);
+    this.app.append(this.div1);
+
+ 
+ 
   }
   // Create an element with an optional CSS class
   createElement(tag, className) {
@@ -64,77 +69,71 @@ class View {
     return element;
   }
 
-  displayData(data){
-    console.log("displayed", data);
-    const div = this.createElement('div', 'videos');
+  showLoginpup(data){
 
+    data.forEach(element => {
+      if(element = "./images/ncis.jpg"){
+        this.headerpic = this.createElement("img", "titlepic");
+        this.headerpic.src = element;
+       
+      }
+    });
+    this.div1.append( this.headerpic);
+    document.querySelector("#show-login").addEventListener('click', function(){
+      document.querySelector(".popup").classList.add("active");
+      document.querySelector(".titlepic").style.display = "none";
+    });
+    document.querySelector(".popup .close-btn").addEventListener('click', function(){
+      document.querySelector(".popup").classList.remove("active");
+      document.querySelector(".titlepic").style.display = "block";
+    });
+    
+  }
 
-    if (data.length === 0) {
-      const p = this.createElement('p');
-      p.textContent = 'No data send!';
-      this.list.append(p);
-    } else {
-      data.forEach(value => {
-        const li = this.createElement('li');
-        li.style.width = '40%';
-        li.style.float = 'right';
-        if(value.endsWith('jpg')){
-        
-          console.log("true "+value);
-          const img = this.createElement('img',  'image');
-          img.src = value;
-          img.style.alignItems = 'left';
-          img.style.display = 'flex';
-          img.style.felxDirection = 'column';
-          img.style.margin = '2,5%';
-          img.style.padding = '0%';
-          img.style.width = '100%';
-          
-          this.list.append(img);
-        } 
-      
-         if(value.endsWith('jpg') == false){
-          this.div2 = this.createElement('div', 'menu_div');
-          this.div2.style.width = '40%';
-          this.div2.style.float = 'right';
-          const span = this.createElement('span');
-          span.textContent = value;
-          
-          li.append(span);        
-          this.div2.append(li);
-          this.list.append(this.div2);
+  login(){
+    const submit = document.getElementById("submit");
+    submit.addEventListener('click', event => {
+      event.preventDefault();
+      var userName = document.getElementById("name").value;
+      var password = document.getElementById("password").value;
+      let params = {
+        userName: userName,
+        password: password
+      }
+      console.log(params);
+      var url = "http://localhost/dokumentenFreigabe-backend/index/dispatchViews";
+      var posting = $.post(url, params);
+      posting.done(function(data){
+        console.log('done'+JSON.parse(data));
+        setTimeout(function(){
+          document.location.href = "http://localhost/dokumentenFreigabe-frontend/"+JSON.parse(data)+"/"+JSON.parse(data)+"View.html"
+        },500);
+      });
 
-        }
-      })
-    }
+  
+    
+
+    })
+    
+  }
  }
 
-openLogin() {
-  const login = document.getElementsByClassName('menu_div')[0];
-        login.addEventListener('click', event =>{
-          event.preventDefault();
-          console.log('login clicked');
-          setTimeout(function(){
-            document.location.href = "index/formular.html";
-          },500);
-        })
-  
-}
 
-}
 class Controller {
   constructor(model, view) {
     this.model = model;
     this.view = view;
     var obj = this;
-  
-        this.model.sendToken(function(data){
-          obj.view.displayData(data)
-          obj.view.openLogin();
-        });
+    this.model.sendToken(function(data){
+      obj.view.showLoginpup(data);
+      obj.view.login();
+      
+    });
+   
+  }
      
   
-  }
+  
 }
 
 const app = new Controller(new Model(),new View() );
