@@ -34,6 +34,7 @@ class View {
     this.list = this.createElement('ul', 'list')
     this.list.append(this.div1);
     this.app.append(this.list);
+    document.body.style.background ="#3a7bd5";
   }
   // Create an element with an optional CSS class
   createElement(tag, className) {

@@ -76,7 +76,8 @@ class View {
           objekt.div2.style.position = 'relative';
           objekt.div2.style.margin = 0;
           li_1.style.margin = 0;
-          ul_0.style.margin = 0;
+          ul_0.style.margin = "15px";
+          ul_0.style.padding = "10px";
           li_1.style.background = '#fff2df';
           li_1.style.borderBottom = '1px solid #dd0074';
           const span_1 = objekt.createElement('span','span_1');

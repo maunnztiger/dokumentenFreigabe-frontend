@@ -68,10 +68,11 @@ class Model {
     this.commandList = this.createElement('ul', 'command-list')
     this.commandList.style.top = '10';         
     this.commandList.style.left = '100%';
-    this.commandList.style.background ='#aaabf6';
+    this.commandList.style.background ='#3a7bd5';
     this.div = this.createElement('div');
+
    
-    
+    document.body.style.background ='#3a7bd5';
     this.app.append(this.headline, this.commandList);
    
   }
@@ -110,7 +111,7 @@ class Model {
       data.forEach(value => {
        
         const li = this.createElement('li');
-        li.style.background ='#aaabf6';
+        li.style.background ='#3a7bd5';
         if(value.image.endsWith('jpg')){
           this.img = this.createElement('img',  'image');
           this.img.src = value.image;
@@ -148,7 +149,7 @@ class Model {
               span_0.textContent= values.name;
               li_0.append(span_0);
               li_0.style.margin = 0;
-              li_0.style.background = '#fff2df';
+              li_0.style.background = '#3a7bd5';
               li_0.style.borderBottom = '1px solid #dd0074';
               ul.append(li_0);
               objekt.div.append(ul);
@@ -216,7 +217,7 @@ if(typeof value.name !== 'undefined'){
     contain.style.width = '2.4%';
     contain.style.height = '10px';
     contain.style.backgroundColor = 'black';
-    contain.style.background =  'linear-gradient(to right bottom, #aaabf6 50%, black 50%)';
+    contain.style.background =  'linear-gradient(to right bottom, #3a7bd5 50%, black 50%)';
     contain.style.transform = 'rotate(-45deg)';
     const span = this.createElement('span');
    

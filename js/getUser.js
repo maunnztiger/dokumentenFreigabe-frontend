@@ -22,6 +22,7 @@ class View {
     this.headline.textContent = 'User-Data';
     this.title = this.createElement('h2')
     this.app.append(this.headline);
+    document.body.style.background ="#3a7bd5";
    
   }
   // Create an element with an optional CSS class

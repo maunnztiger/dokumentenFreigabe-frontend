@@ -19,6 +19,7 @@ class View {
     this.title = this.createElement('h2')
     this.commandList = this.createElement('ul', 'relative')
     this.app.append(this.headline, this.commandList);
+    document.body.style.background ="#3a7bd5";
    
   }
   // Create an element with an optional CSS class
