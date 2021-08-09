@@ -188,7 +188,7 @@ class View {
  bindSelectedPDF(){
      this.list.addEventListener('click', event => {
         event.preventDefault();
-        console.log("fired " + event.target.textContent);
+       
         
         var baseURL = "http://localhost/dokumentenFreigabe-backend/";
         var url  = baseURL+ "index/getPdfBinary"
@@ -196,22 +196,23 @@ class View {
           fileName: event.target.textContent,
            
             };
-        var obj = this;
         var posting = $.post(url, params);
-        posting.done(function(){
-            this.embed = document.getElementById('embed');
-            setTimeout(function(){
-               this.embed.src = url;
-            }, 1000)
-       
-            this.embed.style.display = "block";
-            obj.list.append(this.embed); 
-          
+        this.embed = document.getElementById('embed');
+        this.embed.src = url;
+        posting.done(function() {
+          // Aktionen bei Erfolg
+          console.log("fired " + event.target.textContent);
+        }).fail(function(data) {
+          // Aktionen bei einem Fehler
+          console.log('fail: '+ data);			
+      });
         
-                      
-        })
+
        
       });
+      this.embed = document.getElementById('embed');
+      this.embed.style.display = "block";
+      this.app.append(this.embed); 
  }
  hideContextMenu(){
   this.div.remove();

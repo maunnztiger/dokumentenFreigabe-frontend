@@ -201,22 +201,15 @@ class View {
           fileName: event.target.textContent,
            
             };
-        var obj = this;
-        var posting = $.post(url, params);
-        posting.done(function(){
-            this.iframe = document.getElementById('iframe');
-            setTimeout(function(){
-               this.iframe.src = url;
-            }, 1000)
-       
-            this.iframe.style.display = "block";
-            obj.list.append(this.iframe); 
-          
-        
-                      
-        })
+     
+        $.post(url, params);
+        this.iframe = document.getElementById('iframe');
+        this.iframe.src = url;
+        this.iframe.style.display = "block";
        
       });
+      this.iframe = document.getElementById('iframe');
+      this.app.append(this.iframe); 
  }
  hideContextMenu(){
   this.div.remove();
